@@ -55,10 +55,10 @@ namespace CsFormsEB102_Ana
             this.pnl3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.pnl2 = new System.Windows.Forms.Panel();
+            this.btnStudents = new System.Windows.Forms.Button();
             this.btnDepartments = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCollaps = new System.Windows.Forms.Button();
-            this.btnStudents = new System.Windows.Forms.Button();
             this.pnlUst.SuspendLayout();
             this.gbSol.SuspendLayout();
             this.pnl1.SuspendLayout();
@@ -365,6 +365,16 @@ namespace CsFormsEB102_Ana
             this.pnl2.TabIndex = 1;
             this.pnl2.Visible = false;
             // 
+            // btnStudents
+            // 
+            this.btnStudents.Location = new System.Drawing.Point(9, 79);
+            this.btnStudents.Name = "btnStudents";
+            this.btnStudents.Size = new System.Drawing.Size(140, 23);
+            this.btnStudents.TabIndex = 5;
+            this.btnStudents.Text = "Öğrenci Giriş";
+            this.btnStudents.UseVisualStyleBackColor = true;
+            this.btnStudents.Click += new System.EventHandler(this.btnStudents_Click);
+            // 
             // btnDepartments
             // 
             this.btnDepartments.Location = new System.Drawing.Point(9, 39);
@@ -398,16 +408,6 @@ namespace CsFormsEB102_Ana
             this.btnCollaps.UseVisualStyleBackColor = true;
             this.btnCollaps.Click += new System.EventHandler(this.btnCollaps_Click);
             // 
-            // btnStudents
-            // 
-            this.btnStudents.Location = new System.Drawing.Point(9, 79);
-            this.btnStudents.Name = "btnStudents";
-            this.btnStudents.Size = new System.Drawing.Size(140, 23);
-            this.btnStudents.TabIndex = 5;
-            this.btnStudents.Text = "Öğrenci Giriş";
-            this.btnStudents.UseVisualStyleBackColor = true;
-            this.btnStudents.Click += new System.EventHandler(this.btnStudents_Click);
-            // 
             // AnaSayfa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,6 +420,7 @@ namespace CsFormsEB102_Ana
             this.Name = "AnaSayfa";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.AnaSayfa_Load);
             this.pnlUst.ResumeLayout(false);
             this.gbSol.ResumeLayout(false);
             this.pnl1.ResumeLayout(false);

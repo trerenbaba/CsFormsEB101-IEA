@@ -139,5 +139,10 @@ namespace CsFormsEB102_Ana
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
         }
+
+        private void AnaSayfa_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("DENEME");
+        }
     }
 }
