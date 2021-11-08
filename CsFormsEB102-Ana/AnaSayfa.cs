@@ -142,7 +142,7 @@ namespace CsFormsEB102_Ana
 
         private void AnaSayfa_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("DENEME");
+            
         }
     }
 }

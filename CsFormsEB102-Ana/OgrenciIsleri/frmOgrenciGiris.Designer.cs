@@ -30,6 +30,7 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
         private void InitializeComponent()
         {
             this.scOgr = new System.Windows.Forms.SplitContainer();
+            this.btnKayıt = new System.Windows.Forms.Button();
             this.mTxtOgrNo = new System.Windows.Forms.MaskedTextBox();
             this.mTxtTc = new System.Windows.Forms.MaskedTextBox();
             this.btnTemizle = new System.Windows.Forms.Button();
@@ -46,14 +47,16 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Liste = new System.Windows.Forms.DataGridView();
+            this.btnSil = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sira = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Soyad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TcNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OgrNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sehir = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Bolum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnKayıt = new System.Windows.Forms.Button();
+            this.isActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.scOgr)).BeginInit();
             this.scOgr.Panel1.SuspendLayout();
             this.scOgr.Panel2.SuspendLayout();
@@ -71,6 +74,7 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             // 
             // scOgr.Panel1
             // 
+            this.scOgr.Panel1.Controls.Add(this.btnSil);
             this.scOgr.Panel1.Controls.Add(this.btnKayıt);
             this.scOgr.Panel1.Controls.Add(this.mTxtOgrNo);
             this.scOgr.Panel1.Controls.Add(this.mTxtTc);
@@ -95,6 +99,16 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             this.scOgr.SplitterDistance = 266;
             this.scOgr.TabIndex = 0;
             // 
+            // btnKayıt
+            // 
+            this.btnKayıt.Location = new System.Drawing.Point(686, 220);
+            this.btnKayıt.Name = "btnKayıt";
+            this.btnKayıt.Size = new System.Drawing.Size(75, 23);
+            this.btnKayıt.TabIndex = 6;
+            this.btnKayıt.Text = "Kayıt";
+            this.btnKayıt.UseVisualStyleBackColor = true;
+            this.btnKayıt.Click += new System.EventHandler(this.btnKayıt_Click);
+            // 
             // mTxtOgrNo
             // 
             this.mTxtOgrNo.Location = new System.Drawing.Point(261, 109);
@@ -113,7 +127,7 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             // 
             // btnTemizle
             // 
-            this.btnTemizle.Location = new System.Drawing.Point(77, 208);
+            this.btnTemizle.Location = new System.Drawing.Point(17, 211);
             this.btnTemizle.Name = "btnTemizle";
             this.btnTemizle.Size = new System.Drawing.Size(75, 23);
             this.btnTemizle.TabIndex = 4;
@@ -226,41 +240,69 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             this.Liste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Liste.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
+            this.Sira,
             this.Ad,
             this.Soyad,
             this.TcNo,
             this.OgrNo,
             this.Sehir,
-            this.Bolum});
+            this.Bolum,
+            this.isActive});
             this.Liste.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Liste.Location = new System.Drawing.Point(0, 0);
+            this.Liste.MultiSelect = false;
             this.Liste.Name = "Liste";
+            this.Liste.ReadOnly = true;
+            this.Liste.RowHeadersWidth = 51;
+            this.Liste.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Liste.Size = new System.Drawing.Size(800, 180);
             this.Liste.TabIndex = 0;
+            this.Liste.DoubleClick += new System.EventHandler(this.Liste_DoubleClick);
+            // 
+            // btnSil
+            // 
+            this.btnSil.Location = new System.Drawing.Point(108, 211);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(75, 23);
+            this.btnSil.TabIndex = 7;
+            this.btnSil.Text = "Sil";
+            this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // Id
             // 
             this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Id.HeaderText = "Id";
             this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // Sira
+            // 
+            this.Sira.HeaderText = "Sira";
+            this.Sira.Name = "Sira";
+            this.Sira.ReadOnly = true;
             // 
             // Ad
             // 
             this.Ad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Ad.HeaderText = "Ad";
             this.Ad.Name = "Ad";
+            this.Ad.ReadOnly = true;
             // 
             // Soyad
             // 
             this.Soyad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Soyad.HeaderText = "Soyad";
             this.Soyad.Name = "Soyad";
+            this.Soyad.ReadOnly = true;
             // 
             // TcNo
             // 
             this.TcNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.TcNo.HeaderText = "TcNo";
             this.TcNo.Name = "TcNo";
+            this.TcNo.ReadOnly = true;
             this.TcNo.Width = 59;
             // 
             // OgrNo
@@ -268,6 +310,7 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             this.OgrNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.OgrNo.HeaderText = "OgrNo";
             this.OgrNo.Name = "OgrNo";
+            this.OgrNo.ReadOnly = true;
             this.OgrNo.Width = 63;
             // 
             // Sehir
@@ -275,22 +318,22 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
             this.Sehir.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Sehir.HeaderText = "Sehir";
             this.Sehir.Name = "Sehir";
+            this.Sehir.ReadOnly = true;
             // 
             // Bolum
             // 
             this.Bolum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Bolum.HeaderText = "Bolum";
             this.Bolum.Name = "Bolum";
+            this.Bolum.ReadOnly = true;
             // 
-            // btnKayıt
+            // isActive
             // 
-            this.btnKayıt.Location = new System.Drawing.Point(686, 220);
-            this.btnKayıt.Name = "btnKayıt";
-            this.btnKayıt.Size = new System.Drawing.Size(75, 23);
-            this.btnKayıt.TabIndex = 6;
-            this.btnKayıt.Text = "Kayıt";
-            this.btnKayıt.UseVisualStyleBackColor = true;
-            this.btnKayıt.Click += new System.EventHandler(this.btnKayıt_Click);
+            this.isActive.HeaderText = "Durum";
+            this.isActive.Name = "isActive";
+            this.isActive.ReadOnly = true;
+            this.isActive.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.isActive.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // frmOgrenciGiris
             // 
@@ -330,13 +373,16 @@ namespace CsFormsEB102_Ana.OgrenciIsleri
         private System.Windows.Forms.Button btnTemizle;
         private System.Windows.Forms.MaskedTextBox mTxtTc;
         private System.Windows.Forms.MaskedTextBox mTxtOgrNo;
+        private System.Windows.Forms.Button btnKayıt;
+        private System.Windows.Forms.Button btnSil;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sira;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Soyad;
         private System.Windows.Forms.DataGridViewTextBoxColumn TcNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn OgrNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sehir;
         private System.Windows.Forms.DataGridViewTextBoxColumn Bolum;
-        private System.Windows.Forms.Button btnKayıt;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActive;
     }
 }

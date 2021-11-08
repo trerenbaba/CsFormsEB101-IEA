@@ -24,6 +24,7 @@
           <Property Name="OgrNo" Type="nvarchar" MaxLength="10" />
           <Property Name="BolumId" Type="int" />
           <Property Name="SehirId" Type="int" />
+          <Property Name="isActive" Type="bit" />
         </EntityType>
         <EntityType Name="tblSehirler">
           <Key>
@@ -95,6 +96,7 @@
           <Property Name="SehirId" Type="Int32" />
           <NavigationProperty Name="tblDepartments" Relationship="Self.FK_tblOgrenciBilgileri_tblDepartments" FromRole="tblOgrenciBilgileri" ToRole="tblDepartments" />
           <NavigationProperty Name="tblSehirler" Relationship="Self.FK_tblOgrenciBilgileri_tblSehirler" FromRole="tblOgrenciBilgileri" ToRole="tblSehirler" />
+          <Property Name="isActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblSehirler">
           <Key>
@@ -159,6 +161,7 @@
           <EntitySetMapping Name="tblOgrenciBilgileri">
             <EntityTypeMapping TypeName="StudentsModel.tblOgrenciBilgileri">
               <MappingFragment StoreEntitySet="tblOgrenciBilgileri">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Soyad" ColumnName="Soyad" />

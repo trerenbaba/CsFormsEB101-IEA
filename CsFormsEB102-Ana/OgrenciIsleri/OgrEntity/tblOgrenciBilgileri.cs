@@ -21,6 +21,7 @@ namespace CsFormsEB102_Ana.OgrenciIsleri.OgrEntity
         public string OgrNo { get; set; }
         public Nullable<int> BolumId { get; set; }
         public Nullable<int> SehirId { get; set; }
+        public Nullable<bool> isActive { get; set; }
     
         public virtual tblDepartments tblDepartments { get; set; }
         public virtual tblSehirler tblSehirler { get; set; }
