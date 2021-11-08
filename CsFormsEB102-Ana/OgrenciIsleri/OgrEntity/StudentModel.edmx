@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblDepartments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolumAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblOgrenciBilgileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tcno" Type="nvarchar" MaxLength="11" />
+          <Property Name="OgrNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="BolumId" Type="int" />
+          <Property Name="SehirId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSehirler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sehir" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_tblOgrenciBilgileri_tblDepartments">
+          <End Role="tblDepartments" Type="Self.tblDepartments" Multiplicity="0..1" />
+          <End Role="tblOgrenciBilgileri" Type="Self.tblOgrenciBilgileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOgrenciBilgileri">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOgrenciBilgileri_tblSehirler">
+          <End Role="tblSehirler" Type="Self.tblSehirler" Multiplicity="0..1" />
+          <End Role="tblOgrenciBilgileri" Type="Self.tblOgrenciBilgileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSehirler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblOgrenciBilgileri">
+              <PropertyRef Name="SehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentsModelStoreContainer">
+          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOgrenciBilgileri" EntityType="Self.tblOgrenciBilgileri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSehirler" EntityType="Self.tblSehirler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblOgrenciBilgileri_tblDepartments" Association="Self.FK_tblOgrenciBilgileri_tblDepartments">
+            <End Role="tblDepartments" EntitySet="tblDepartments" />
+            <End Role="tblOgrenciBilgileri" EntitySet="tblOgrenciBilgileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOgrenciBilgileri_tblSehirler" Association="Self.FK_tblOgrenciBilgileri_tblSehirler">
+            <End Role="tblSehirler" EntitySet="tblSehirler" />
+            <End Role="tblOgrenciBilgileri" EntitySet="tblOgrenciBilgileri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblDepartments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolumAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblOgrenciBilgileri" Relationship="Self.FK_tblOgrenciBilgileri_tblDepartments" FromRole="tblDepartments" ToRole="tblOgrenciBilgileri" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblOgrenciBilgileri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tcno" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="OgrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BolumId" Type="Int32" />
+          <Property Name="SehirId" Type="Int32" />
+          <NavigationProperty Name="tblDepartments" Relationship="Self.FK_tblOgrenciBilgileri_tblDepartments" FromRole="tblOgrenciBilgileri" ToRole="tblDepartments" />
+          <NavigationProperty Name="tblSehirler" Relationship="Self.FK_tblOgrenciBilgileri_tblSehirler" FromRole="tblOgrenciBilgileri" ToRole="tblSehirler" />
+        </EntityType>
+        <EntityType Name="tblSehirler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sehir" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblOgrenciBilgileri" Relationship="Self.FK_tblOgrenciBilgileri_tblSehirler" FromRole="tblSehirler" ToRole="tblOgrenciBilgileri" />
+        </EntityType>
+        <Association Name="FK_tblOgrenciBilgileri_tblDepartments">
+          <End Role="tblDepartments" Type="Self.tblDepartments" Multiplicity="0..1" />
+          <End Role="tblOgrenciBilgileri" Type="Self.tblOgrenciBilgileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDepartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblOgrenciBilgileri">
+              <PropertyRef Name="BolumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblOgrenciBilgileri_tblSehirler">
+          <End Role="tblSehirler" Type="Self.tblSehirler" Multiplicity="0..1" />
+          <End Role="tblOgrenciBilgileri" Type="Self.tblOgrenciBilgileri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSehirler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblOgrenciBilgileri">
+              <PropertyRef Name="SehirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartments" />
+          <EntitySet Name="tblOgrenciBilgileri" EntityType="Self.tblOgrenciBilgileri" />
+          <EntitySet Name="tblSehirler" EntityType="Self.tblSehirler" />
+          <AssociationSet Name="FK_tblOgrenciBilgileri_tblDepartments" Association="Self.FK_tblOgrenciBilgileri_tblDepartments">
+            <End Role="tblDepartments" EntitySet="tblDepartments" />
+            <End Role="tblOgrenciBilgileri" EntitySet="tblOgrenciBilgileri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblOgrenciBilgileri_tblSehirler" Association="Self.FK_tblOgrenciBilgileri_tblSehirler">
+            <End Role="tblSehirler" EntitySet="tblSehirler" />
+            <End Role="tblOgrenciBilgileri" EntitySet="tblOgrenciBilgileri" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentsModelStoreContainer" CdmEntityContainer="StudentsEntities">
+          <EntitySetMapping Name="tblDepartments">
+            <EntityTypeMapping TypeName="StudentsModel.tblDepartments">
+              <MappingFragment StoreEntitySet="tblDepartments">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BolumAdi" ColumnName="BolumAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOgrenciBilgileri">
+            <EntityTypeMapping TypeName="StudentsModel.tblOgrenciBilgileri">
+              <MappingFragment StoreEntitySet="tblOgrenciBilgileri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Tcno" ColumnName="Tcno" />
+                <ScalarProperty Name="OgrNo" ColumnName="OgrNo" />
+                <ScalarProperty Name="BolumId" ColumnName="BolumId" />
+                <ScalarProperty Name="SehirId" ColumnName="SehirId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSehirler">
+            <EntityTypeMapping TypeName="StudentsModel.tblSehirler">
+              <MappingFragment StoreEntitySet="tblSehirler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sehir" ColumnName="sehir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
